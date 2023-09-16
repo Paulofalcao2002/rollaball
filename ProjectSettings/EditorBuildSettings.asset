@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Minigame.unity
     guid: c47370fe486248f4496c07a76900ea4d
+  - enabled: 1
+    path: Assets/Scenes/ReplayMenu.unity
+    guid: 39ec62b9446178d4ebbe0b5438039ab3
   m_configObjects: {}

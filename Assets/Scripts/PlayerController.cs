@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement; 
 
 public class PlayerController : MonoBehaviour
 {
     public float speed = 10.0f;
     public TextMeshProUGUI countText;
-    public GameObject winTextObject;
 
     private int count;
     private Rigidbody rb;
@@ -22,7 +22,6 @@ public class PlayerController : MonoBehaviour
         count = 0;
 
         SetCountText();
-        winTextObject.SetActive(false);
     }
 
     void OnMove(InputValue movementValue)
@@ -38,7 +37,7 @@ public class PlayerController : MonoBehaviour
         countText.text = "Count: " + count.ToString();
         if (count >= 12)
         {
-            winTextObject.SetActive(true);
+            SceneManager.LoadScene("Scenes/ReplayMenu");
         }
     }
 
