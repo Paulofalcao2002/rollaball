@@ -8,5 +8,6 @@ public class MenuController : MonoBehaviour
     public void OnPlayButton ()
     {
         SceneManager.LoadScene("Scenes/Minigame");
+        FindObjectOfType<AudioManager>().Play("Start");
     }
 }
