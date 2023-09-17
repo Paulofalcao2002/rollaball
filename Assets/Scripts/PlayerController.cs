@@ -9,8 +9,10 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 10.0f;
     public TextMeshProUGUI countText;
+    public TextMeshProUGUI timerText;
 
     private int count;
+    private float timer;
     private Rigidbody rb;
     private float movementX;
     private float movementY;
@@ -20,8 +22,16 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         count = 0;
+        timer = 10;
 
         SetCountText();
+        SetTimerText();
+    }
+
+    void Update() 
+    {
+        timer -= Time.deltaTime;
+        SetTimerText();
     }
 
     void OnMove(InputValue movementValue)
@@ -35,7 +45,16 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
-        if (count >= 12)
+    }
+
+    void SetTimerText()
+    {
+        string newText = "Time: " + timer.ToString("0");
+        if (newText != timerText.text)
+        {
+            timerText.text = newText;
+        }
+        if (timer <= 0)
         {
             SceneManager.LoadScene("Scenes/ReplayMenu");
         }
@@ -56,6 +75,9 @@ public class PlayerController : MonoBehaviour
             count++;
 
             FindObjectOfType<AudioManager>().Play("Pickup");
+            FindObjectOfType<Spawner>().SpawnCollectible();
+
+            timer += 3f;
 
             SetCountText();
         }
