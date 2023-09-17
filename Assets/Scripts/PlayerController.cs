@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     void SetCountText()
     {
-        countText.text = "Count: " + count.ToString();
+        countText.text = "Points: " + count.ToString();
     }
 
     void SetTimerText()
@@ -56,6 +56,15 @@ public class PlayerController : MonoBehaviour
         }
         if (timer <= 0)
         {
+            PlayerPrefs.SetInt("Score", count);
+            int maxScore = PlayerPrefs.GetInt("MaxScore", 0);
+
+            if (count > maxScore)
+            {
+                PlayerPrefs.SetInt("MaxScore", count);
+            }
+
+            PlayerPrefs.Save();
             SceneManager.LoadScene("Scenes/ReplayMenu");
         }
     }
