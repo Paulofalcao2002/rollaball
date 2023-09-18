@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float movementX;
     private float movementY;
+    private Vector3 initialPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         count = 0;
         timer = 10;
+        initialPosition = new Vector3(0, 0.5f, 0);
 
         SetCountText();
         SetTimerText();
@@ -32,6 +34,12 @@ public class PlayerController : MonoBehaviour
     {
         timer -= Time.deltaTime;
         SetTimerText();
+
+        if (transform.position.x < -10 || transform.position.x > 10 ||
+            transform.position.z < -10 || transform.position.z > 10)
+        {
+            transform.position = initialPosition;
+        }
     }
 
     void OnMove(InputValue movementValue)
